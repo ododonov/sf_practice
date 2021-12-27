@@ -1,0 +1,31 @@
+version: '3.8'
+services:
+  postgres:
+    image: postgres:12
+    container_name: postgresql
+    restart: unless-stopped
+    ports:
+    - "5432:5432"
+    volumes:
+    - /etc/localtime:/etc/localtime:ro
+    - ./postgresql:/var/lib/postgresql/data
+    environment:
+      POSTGRES_PASSWORD: password_123
+      POSTGRES_DB: sf
+      POSTGRES_USER: sf
+    networks:
+    - db-network
+
+  sf_script:
+    image: 48e3aef63e00
+    container_name: sf_script
+    ports:
+    - "5000:5000"
+    volumes:
+    - /srv/app:/srv/app
+    networks:
+    - db-network
+
+networks:
+    db-network:
+      driver: bridge
