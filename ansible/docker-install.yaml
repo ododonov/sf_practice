@@ -1,6 +1,6 @@
 ---
 - name: Install Docker
-  hosts: new
+  hosts: localhost
   become: yes
   tasks:
     - name: Install dependencies
