@@ -1,0 +1,75 @@
+global: 
+    scrape_interval: "30s"
+    evaluation_interval: 5s
+alerting:
+  alertmanagers:
+  - static_configs:
+    - targets:
+      - alertmanager:9093
+rule_files:
+  # - "alert.rules.yml"
+  # - "system.rules.yml"
+  # - "web.rules.yml"
+  # - "services.rules.yml"
+    - "/prometheus/rules.d/*.rules.yml"
+scrape_configs:
+    - job_name: prometheus
+      scrape_interval: 5m
+      static_configs:
+        - targets: ['localhost:9090']
+        - targets: ['192.168.3.226:9100']
+        - targets: ['cadvisor:8080']
+
+    - job_name: vm_mes_doc
+      scrape_interval: 15s
+      static_configs:
+      - targets:
+        - 192.168.3.224:9100
+        - 192.168.3.224:9200
+        - 192.168.3.224:9323
+
+    - job_name: vm_mes_db
+      scrape_interval: 15s
+      static_configs:
+      - targets:
+        - 192.168.0.69:9100
+        - 192.168.0.69:9200
+        - 192.168.0.69:9323
+
+    - job_name: vm_mes_stage 
+      scrape_interval: 15s 
+      static_configs: 
+      - targets: 
+        - 192.168.0.179:9100 
+        - 192.168.0.179:9200 
+        - 192.168.0.179:9323 
+ 
+    - job_name: vm_mes_prod 
+      scrape_interval: 15s 
+      static_configs: 
+      - targets: 
+        - 192.168.0.68:9100 
+        - 192.168.0.68:9200 
+        - 192.168.0.68:9323 
+ 
+    - job_name: vm_mes_backup 
+      scrape_interval: 15s 
+      static_configs: 
+      - targets: 
+        - 192.168.3.223:9100 
+        - 192.168.3.223:9200 
+        - 192.168.3.223:9323 
+ 
+    - job_name: vm_mes_auth 
+      scrape_interval: 15s 
+      static_configs: 
+      - targets: 
+        - 192.168.3.221:9100 
+        - 192.168.3.221:9200 
+        - 192.168.3.221:9323 
+ 
+    - job_name: vm_mes_notif 
+      scrape_interval: 15s 
+      static_configs: 
+      - targets: 
+        - 192.168.3.225:9100
